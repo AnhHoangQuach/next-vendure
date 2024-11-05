@@ -1,101 +1,304 @@
-import Image from "next/image";
+'use client'
 
-export default function Home() {
+import { Button } from '@/components/ui/button'
+import { Card, CardContent } from '@/components/ui/card'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Input } from '@/components/ui/input'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
+import { Box, Clock, PackageMinus, PackagePlus, RefreshCw, Search } from 'lucide-react'
+import * as React from 'react'
+
+export default function Component() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="grid gap-4 p-4">
+      <div className="grid gap-2">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+          <StatsCard icon={Box} label="전체" value="50000건" />
+          <StatsCard icon={PackagePlus} label="판매중" value="50000건" />
+          <StatsCard icon={Clock} label="승인대기" value="50000건" />
+          <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
+          <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <div className="rounded-lg border shadow-sm">
+        <div className="p-6">
+          <div className="space-y-4">
+            <div className="flex items-center gap-6">
+              <Label>검색어</Label>
+              <div className="flex items-center gap-6">
+                <Select defaultValue="all">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="all">전체</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input placeholder="Search..." />
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <Label>판매상태</Label>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <Label>브랜드</Label>
+              <div className="flex items-center gap-6">
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+            <hr />
+            <div className="flex items-center gap-6">
+              <Label>검색어</Label>
+              <div className="flex items-center gap-6">
+                <Select defaultValue="all">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="all">전체</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Input placeholder="Search..." />
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <Label>판매상태</Label>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox id="terms" />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  전체
+                </label>
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <Label>브랜드</Label>
+              <div className="flex items-center gap-6">
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <Select defaultValue="gucci">
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select brand" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center gap-2 p-6">
+          <Button className="ml-auto">
+            <Search className="mr-2 h-4 w-4" />
+            검색
+          </Button>
+          <Button variant="outline">
+            <RefreshCw className="mr-2 h-4 w-4" />
+            초기화
+          </Button>
+        </div>
+      </div>
+      <div className="rounded-lg border shadow-sm">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-12">
+                <Checkbox />
+              </TableHead>
+              <TableHead>상품번호</TableHead>
+              <TableHead>이미지</TableHead>
+              <TableHead>상품명</TableHead>
+              <TableHead>판매가</TableHead>
+              <TableHead>상태</TableHead>
+              <TableHead>재고</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            <TableRow>
+              <TableCell>
+                <Checkbox />
+              </TableCell>
+              <TableCell>203277</TableCell>
+              <TableCell></TableCell>
+              <TableCell>비버 여성 블랙 케이스/본조</TableCell>
+              <TableCell>380,000</TableCell>
+              <TableCell>
+                <span className="rounded-full bg-green-100 px-2 py-1 text-xs text-green-600">
+                  판매중
+                </span>
+              </TableCell>
+              <TableCell>50</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </div>
     </div>
-  );
+  )
+}
+
+function StatsCard({
+  icon: Icon,
+  label,
+  value,
+}: {
+  icon: React.ElementType
+  label: string
+  value: string
+  notification?: number
+}) {
+  return (
+    <Card>
+      <CardContent className="flex flex-row items-center gap-4 p-6">
+        <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-100">
+          <Icon className="h-6 w-6" />
+        </div>
+        <div className="space-y-1">
+          <p className="text-sm font-medium text-gray-500">{label}</p>
+          <p className="text-xl font-bold">{value}</p>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}
+
+function Label({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+      {children}
+    </div>
+  )
 }
