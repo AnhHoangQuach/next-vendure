@@ -1,9 +1,17 @@
-'use client'
-
+import DownloadManager from '@/components/download-manager'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Checkbox } from '@/components/ui/checkbox'
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
 import {
   Select,
   SelectContent,
@@ -20,17 +28,19 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { Box, Clock, PackageMinus, PackagePlus, RefreshCw, Search } from 'lucide-react'
-import * as React from 'react'
+import { Box, Clock, Edit, PackageMinus, PackagePlus, Pin, RefreshCw, Search } from 'lucide-react'
+import { Fragment } from 'react'
 
-export default function Component() {
+export default function Home() {
   return (
     <div className="grid gap-4 p-4">
       <div className="grid gap-2">
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-5">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-7">
           <StatsCard icon={Box} label="전체" value="50000건" />
           <StatsCard icon={PackagePlus} label="판매중" value="50000건" />
           <StatsCard icon={Clock} label="승인대기" value="50000건" />
+          <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
+          <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
           <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
           <StatsCard icon={PackageMinus} label="판매중지" value="50000건" />
         </div>
@@ -146,46 +156,48 @@ export default function Component() {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Label>판매상태</Label>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  전체
-                </label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  전체
-                </label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  전체
-                </label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Checkbox id="terms" />
-                <label
-                  htmlFor="terms"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
-                  전체
-                </label>
-              </div>
+              {Array.from({ length: 5 }).map((_, index) => (
+                <Fragment key={index}>
+                  <Label>판매상태</Label>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox id="terms" />
+                    <label
+                      htmlFor="terms"
+                      className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                      전체
+                    </label>
+                  </div>
+                </Fragment>
+              ))}
             </div>
             <div className="flex items-center gap-6">
               <Label>브랜드</Label>
+              <div className="flex items-center gap-6">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <Select defaultValue="gucci" key={index}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select brand" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectGroup>
+                        <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+                      </SelectGroup>
+                    </SelectContent>
+                  </Select>
+                ))}
+              </div>
+            </div>
+            <hr />
+            <div className="flex items-center gap-6">
+              <Label>검색어</Label>
+              <div className="flex items-center gap-6">
+                <Input placeholder="Search..." />
+                <Input placeholder="Search..." />
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <Label>검색어</Label>
               <div className="flex items-center gap-6">
                 <Select defaultValue="gucci">
                   <SelectTrigger>
@@ -197,27 +209,24 @@ export default function Component() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <Select defaultValue="gucci">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select brand" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-                <Select defaultValue="gucci">
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select brand" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
+                <Input placeholder="Search..." />
+                <Input placeholder="Search..." />
               </div>
+            </div>
+            <hr />
+            <div className="flex items-center gap-6">
+              <Label>판매상태</Label>
+              {Array.from({ length: 3 }).map((_, index) => (
+                <div className="flex items-center space-x-2" key={index}>
+                  <Checkbox id="terms" />
+                  <label
+                    htmlFor="terms"
+                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                  >
+                    전체
+                  </label>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -230,6 +239,69 @@ export default function Component() {
             <RefreshCw className="mr-2 h-4 w-4" />
             초기화
           </Button>
+        </div>
+      </div>
+      <div className="flex items-center gap-6">
+        <Label>검색어</Label>
+        <div className="flex items-center gap-6">
+          <Select defaultValue="gucci">
+            <SelectTrigger>
+              <SelectValue placeholder="Select brand" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="gucci">GUCCI, PRADA, HERM... 3개</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="outline">컴럼</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader className="mt-4">
+                <DialogTitle className="flex gap-2 items-center justify-between">
+                  <div>컴럼 양식 목록</div>
+                  <div className="text-sm text-muted-foreground">4/10</div>
+                </DialogTitle>
+              </DialogHeader>
+              <div className="grid grid-cols-2">
+                <div>컴럼 양식 </div>
+                <div className="flex items-center justify-between">
+                  컴럼 양식 <Pin className="h-4 w-4" />
+                </div>
+              </div>
+              <hr />
+              <div className="grid grid-cols-2 gap-2">
+                <div className="flex items-center gap-2">
+                  <Checkbox /> 컴럼 양식 <Edit className="h-4 w-4" />
+                </div>
+                <div className="flex items-center justify-between">
+                  컴럼 양식 <Pin className="h-4 w-4" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Checkbox /> 컴럼 양식 <Edit className="h-4 w-4" />
+                </div>
+                <div className="flex items-center justify-between">
+                  컴럼 양식 <Pin className="h-4 w-4" />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Checkbox /> 컴럼 양식 <Edit className="h-4 w-4" />
+                </div>
+                <div className="flex items-center justify-between">
+                  컴럼 양식 <Pin className="h-4 w-4" />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button variant="outline" className="flex-1 text-sm font-medium" size="sm">
+                  양식 불러오기
+                </Button>
+                <Button variant="outline" className="flex-1 text-sm font-medium" size="sm">
+                  닫기
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
       <div className="rounded-lg border shadow-sm">
@@ -266,6 +338,16 @@ export default function Component() {
           </TableBody>
         </Table>
       </div>
+      <div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="outline">컴럼</Button>
+          </DialogTrigger>
+          <DialogContent className='max-w-fit'>
+            <DownloadManager />
+          </DialogContent>
+        </Dialog>
+      </div>
     </div>
   )
 }
@@ -292,13 +374,5 @@ function StatsCard({
         </div>
       </CardContent>
     </Card>
-  )
-}
-
-function Label({ children }: { children: React.ReactNode }) {
-  return (
-    <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-      {children}
-    </div>
   )
 }

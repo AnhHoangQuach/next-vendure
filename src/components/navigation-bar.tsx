@@ -65,7 +65,7 @@ export default function NavigationBar() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <SidebarMenuButton>
-                    Select Workspace
+                    Select
                     <ChevronDown className="ml-auto" />
                   </SidebarMenuButton>
                 </DropdownMenuTrigger>
@@ -86,7 +86,7 @@ export default function NavigationBar() {
       <SidebarContent>
         {Object.entries(menuData).map(([key, section]) => (
           <SidebarGroup key={key}>
-            <SidebarGroupLabel className='text-lg'>{section.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className="text-lg">{section.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {section.items.map((group, index) => (
