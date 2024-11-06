@@ -20,7 +20,8 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from '@/components/ui/sidebar'
-import { ChevronDown } from 'lucide-react'
+import { CarTaxiFront, ChevronDown, ShoppingCart } from 'lucide-react'
+import Image from 'next/image'
 
 const menuData = {
   productManagement: {
@@ -59,7 +60,9 @@ export default function NavigationBar() {
     <Sidebar>
       <SidebarHeader>
         <div className="flex flex-col items-center gap-2">
-          <div className="h-20 w-20 rounded-full border border-black"></div>
+          <div className="min-h-10 flex justify-center items-center">
+            <Image alt="logo" src="/logo.png" width={100} height={22} />
+          </div>
           <SidebarMenu>
             <SidebarMenuItem>
               <DropdownMenu>
@@ -86,7 +89,7 @@ export default function NavigationBar() {
       <SidebarContent>
         {Object.entries(menuData).map(([key, section]) => (
           <SidebarGroup key={key}>
-            <SidebarGroupLabel className="text-lg">{section.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className='font-bold'>{section.title}</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {section.items.map((group, index) => (
@@ -94,7 +97,9 @@ export default function NavigationBar() {
                     <SidebarMenuItem>
                       <CollapsibleTrigger asChild>
                         <SidebarMenuButton className="w-full justify-between">
-                          {group.title}
+                          <div className='flex items-center gap-2 font-bold'>
+                            <ShoppingCart size='16'/> {group.title}
+                          </div>
                           <ChevronDown className="h-4 w-4" />
                         </SidebarMenuButton>
                       </CollapsibleTrigger>

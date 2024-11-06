@@ -49,7 +49,7 @@ export default function Home() {
         <div className="p-6">
           <div className="space-y-4">
             <div className="flex items-center gap-6">
-              <Label>검색어</Label>
+              <Label className='font-bold'>검색어</Label>
               <div className="flex items-center gap-6">
                 <Select defaultValue="all">
                   <SelectTrigger>
@@ -65,7 +65,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Label>판매상태</Label>
+              <Label className='font-bold'>판매상태</Label>
               <div className="flex items-center space-x-2">
                 <Checkbox id="terms" />
                 <label
@@ -104,7 +104,7 @@ export default function Home() {
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Label>브랜드</Label>
+              <Label className='font-bold'>브랜드</Label>
               <div className="flex items-center gap-6">
                 <Select defaultValue="gucci">
                   <SelectTrigger>
@@ -140,7 +140,7 @@ export default function Home() {
             </div>
             <hr />
             <div className="flex items-center gap-6">
-              <Label>검색어</Label>
+              <Label className='font-bold'>검색어</Label>
               <div className="flex items-center gap-6">
                 <Select defaultValue="all">
                   <SelectTrigger>
@@ -158,7 +158,7 @@ export default function Home() {
             <div className="flex items-center gap-6">
               {Array.from({ length: 5 }).map((_, index) => (
                 <Fragment key={index}>
-                  <Label>판매상태</Label>
+                  <Label className='font-bold'>판매상태</Label>
                   <div className="flex items-center space-x-2">
                     <Checkbox id="terms" />
                     <label
@@ -172,7 +172,7 @@ export default function Home() {
               ))}
             </div>
             <div className="flex items-center gap-6">
-              <Label>브랜드</Label>
+              <Label className='font-bold'>브랜드</Label>
               <div className="flex items-center gap-6">
                 {Array.from({ length: 5 }).map((_, index) => (
                   <Select defaultValue="gucci" key={index}>
@@ -190,14 +190,14 @@ export default function Home() {
             </div>
             <hr />
             <div className="flex items-center gap-6">
-              <Label>검색어</Label>
+              <Label className='font-bold'>검색어</Label>
               <div className="flex items-center gap-6">
                 <Input placeholder="Search..." />
                 <Input placeholder="Search..." />
               </div>
             </div>
             <div className="flex items-center gap-6">
-              <Label>검색어</Label>
+              <Label className='font-bold'>검색어</Label>
               <div className="flex items-center gap-6">
                 <Select defaultValue="gucci">
                   <SelectTrigger>
@@ -215,7 +215,7 @@ export default function Home() {
             </div>
             <hr />
             <div className="flex items-center gap-6">
-              <Label>판매상태</Label>
+              <Label className='font-bold'>판매상태</Label>
               {Array.from({ length: 3 }).map((_, index) => (
                 <div className="flex items-center space-x-2" key={index}>
                   <Checkbox id="terms" />
@@ -242,7 +242,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-center gap-6">
-        <Label>검색어</Label>
+        <Label className='font-bold'>검색어</Label>
         <div className="flex items-center gap-6">
           <Select defaultValue="gucci">
             <SelectTrigger>
@@ -308,7 +308,7 @@ export default function Home() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-12">
+              <TableHead>
                 <Checkbox />
               </TableHead>
               <TableHead>상품번호</TableHead>
